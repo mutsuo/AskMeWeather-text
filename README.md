@@ -14,13 +14,13 @@ AskMeWeather text是一款天气查询软件，简洁易用，内嵌两种机器
 
 在首页，使用纯文字排版展示基本天气信息，应用的主题会随着天气发生变化。
 
-<img src="image/weatherboard.jpg" alt="weatherboard" style="zoom:80%;" />
+<img src="image/weatherboard.JPG" alt="weatherboard" style="zoom:80%;" />
 
 ### 对话
 
 在对话界面，您可以尝试与bot对话。您可以键入文字，或使用语音。
 
-<img src="image/chat.jpg" alt="chat" style="zoom:80%;" />
+<img src="image/chat.JPG" alt="chat" style="zoom:80%;" />
 
 ## 权限
 

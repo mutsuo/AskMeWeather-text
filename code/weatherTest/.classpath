@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="H:/java lib/jsonobjectjar_jb51/JSONObject所必须的6个包/json-lib-2.1-jdk15.jar"/>
 	<classpathentry kind="lib" path="H:/java lib/ApachePoiAllJar/poi-3.7.jar"/>
 	<classpathentry kind="lib" path="H:/java lib/jieba-analysis-1.0.2/jieba-analysis-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/psychologicalprj/WebContent/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

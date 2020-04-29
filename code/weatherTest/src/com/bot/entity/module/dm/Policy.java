@@ -33,7 +33,7 @@ public class Policy {
 	public final static int INSTRUCTION_ERROR_DATE_MONTH_LOST = 12;
 	public final static int INSTRUCTION_ERROR_DATE_DAY_AND_MONTH_LOST = 13;
 	public final static int INSTRUCTION_ERROR_DATE_LOST = 14;	//日期语义槽不存在
-	public final static int INSTRUCTION_ERROR_DATE_UNSUPPORT = 14; //日期不支持（是过去日期）
+	public final static int INSTRUCTION_ERROR_DATE_UNSUPPORT = 15; //日期不支持（是过去日期）
 	
 	//16~19为地点语义槽相关指令
 	public final static int INSTRUCTION_ERROR_LOC_LOST = 16;

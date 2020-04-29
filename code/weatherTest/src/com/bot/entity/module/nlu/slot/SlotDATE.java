@@ -12,26 +12,26 @@ import java.util.Date;
  *@date:2020年2月6日下午5:56:19
  */
 public class SlotDATE {
-	private int day;
-	private int month;
-	private int year;
+//	private int date.getDay();
+//	private int month;
+//	private int year;
+	private MyDate date;
 	private int startIndex;	//语义槽在原始语料中的起始位置
 	private int endIndex;	//语义槽在原始语料中的结束位置
 	private String rawString; //当且仅当语义槽为相对时间短语时，启用该属性
 	
 	public SlotDATE() {
-		this.day = -1;
-		this.month = -1;
-		this.year = -1;
+		this.date = new MyDate();
 		this.startIndex = -1;
 		this.endIndex = -1;
 		this.rawString = "";
 	}
 	
 	public SlotDATE(int day,int month,int year) {
-		this.day = day;
-		this.month = month;
-		this.year = year;
+		this.date = new MyDate();
+		this.date.setDay(day);
+		this.date.setMonth(month);
+		this.date.setYear(year);
 		this.startIndex = -1;
 		this.endIndex = -1;
 		this.rawString = "";
@@ -39,7 +39,7 @@ public class SlotDATE {
 	
 	public boolean isFilled() {
 		boolean flag = false;
-		if(this.day!=-1 && this.month!=-1 && this.year!=-1) {
+		if(this.date.getDay()!=-1 && this.date.getMonth()!=-1 && this.date.getYear()!=-1) {
 			flag = true;
 		}
 			
@@ -84,9 +84,7 @@ public class SlotDATE {
 	 * @param rawDate
 	 */
 	public SlotDATE(String rawDate) {
-		this.day = -1;
-		this.month = -1;
-		this.year = -1;
+		this.date = new MyDate(); 
 		
 		String regex = "[年月日号]|[\\.-/\\\\]";
 		String[] dateElems = rawDate.split(regex);
@@ -95,46 +93,46 @@ public class SlotDATE {
 			int index = 0;
 			if(rawDate.indexOf("年")!=-1) {
 				while(index<dateElems.length && dateElems[index]=="") index++;
-				this.year = toNum(dateElems[index]);
+				this.date.setYear(toNum(dateElems[index]));
 				index++;
 			}
 			if(rawDate.indexOf("月")!=-1) {
 				if(index>=dateElems.length) index = 0;
 				while(index<dateElems.length && dateElems[index]=="") index++;
-				this.month = toNum(dateElems[index]);
+				this.date.setMonth(toNum(dateElems[index]));
 				index++;
 			}
 			if(rawDate.indexOf("日")!=-1 || rawDate.indexOf("号")!=-1) {
 				if(index>=dateElems.length) index = 0;
 				while(index<dateElems.length && dateElems[index]=="") index++;
-				this.day = toNum(dateElems[index]);
+				this.date.setDay(toNum(dateElems[index]));
 				index++;
 			}
 			if(index<dateElems.length) {
 				while(index<dateElems.length && dateElems[index]=="") index++;
-				this.day = toNum(dateElems[index]);
+				this.date.setDay(toNum(dateElems[index]));
 			}
 		}else {
 			for(int i = dateElems.length-1 ; i >= 0; i--) {
 				if(!dateElems[i].equals("")) {
 					if(dateElems[i].length() < 4) {
-						if(this.day==-1) {
-							this.day = toNum(dateElems[i]);						
-						}else if(this.month==-1) {
-							this.month = toNum(dateElems[i]);
-						}else if(this.year==-1){
+						if(this.date.getDay()==-1) {
+							this.date.setDay(toNum(dateElems[i]));						
+						}else if(this.date.getMonth()==-1) {
+							this.date.setMonth(toNum(dateElems[i]));
+						}else if(this.date.getYear()==-1){
 							if(dateElems[i].length()==1) {
-								this.year = toNum("200"+dateElems[i]);							
+								this.date.setYear(toNum("200"+dateElems[i]));							
 							}
 							if(dateElems[i].length()==2) {
-								this.year = toNum("20"+dateElems[i]);							
+								this.date.setYear(toNum("20"+dateElems[i]));							
 							}
 							if(dateElems[i].length()==3) {
-								this.year = toNum("2"+dateElems[i].substring(1, 3));
+								this.date.setYear(toNum("2"+dateElems[i].substring(1, 3)));
 							}
 						}
 					}else{
-						this.year = toNum(dateElems[i].substring(dateElems[i].length()-4,dateElems[i].length()));
+						this.date.setYear(toNum(dateElems[i].substring(dateElems[i].length()-4,dateElems[i].length())));
 					}
 				}
 			}
@@ -147,22 +145,22 @@ public class SlotDATE {
 	}
 	
 	public int getDay() {
-		return day;
+		return date.getDay();
 	}
 	public void setDay(int day) {
-		this.day = day;
+		this.date.setDay(day);
 	}
 	public int getMonth() {
-		return month;
+		return this.date.getMonth();
 	}
 	public void setMonth(int month) {
-		this.month = month;
+		this.date.setMonth(month);
 	}
 	public int getYear() {
-		return year;
+		return this.date.getYear();
 	}
 	public void setYear(int year) {
-		this.year = year;
+		this.date.setYear(year);
 	}
 	
 	
@@ -197,12 +195,12 @@ public class SlotDATE {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + day;
+		result = prime * result + date.getDay();
 		result = prime * result + endIndex;
-		result = prime * result + month;
+		result = prime * result + date.getMonth();
 		result = prime * result + ((rawString == null) ? 0 : rawString.hashCode());
 		result = prime * result + startIndex;
-		result = prime * result + year;
+		result = prime * result + date.getYear();
 		return result;
 	}
 
@@ -211,11 +209,11 @@ public class SlotDATE {
 	 */
 	public boolean equals(Object obj) {
 		SlotDATE other = (SlotDATE) obj;
-		if (day != other.day)
+		if (date.getDay() != other.date.getDay())
 			return false;
 //		if (endIndex != other.endIndex)
 //			return false;
-		if (month != other.month)
+		if (date.getMonth() != other.date.getMonth())
 			return false;
 //		if (rawString == null) {
 //			if (other.rawString != null)
@@ -224,7 +222,7 @@ public class SlotDATE {
 //			return false;
 //		if (startIndex != other.startIndex)
 //			return false;
-		if (year != other.year)
+		if (date.getYear() != other.date.getYear())
 			return false;
 		return true;
 	}
@@ -240,23 +238,23 @@ public class SlotDATE {
 		String d = "";
 		String m = "";
 		
-		if(this.day==-1) {
+		if(this.date.getDay()==-1) {
 			d = "01";
-		}else if(this.day < 10) {
-			d = "0" + this.day;
+		}else if(this.date.getDay() < 10) {
+			d = "0" + this.date.getDay();
 		}else {
-			d = "" + this.day;
+			d = "" + this.date.getDay();
 		}
 		
-		if(this.month==-1) {
+		if(this.date.getMonth()==-1) {
 			m = "01";
-		}else if(this.month < 10) {
-			m = "0" + this.month;
+		}else if(this.date.getMonth() < 10) {
+			m = "0" + this.date.getMonth();
 		}else {
-			m = "" + this.month;
+			m = "" + this.date.getMonth();
 		}
 		
-		return this.year + "-" + m + "-" + d;
+		return this.date.getYear() + "-" + m + "-" + d;
 	}
 	
 	/**
@@ -275,13 +273,13 @@ public class SlotDATE {
 		
 		//检查时间是否合乎常识
 		int[] daySum = {-1,31,-1,31,30,31,30,31,31,30,31,30,31};
-		if(this.year%4==0 && this.year%100!=0 || this.year%400==0) {
+		if(this.date.getYear()%4==0 && this.date.getYear()%100!=0 || this.date.getYear()%400==0) {
 			daySum[2] = 29;
 		}else {
 			daySum[2] = 28;
 		}
-		if(this.day>0 && this.month>=1 && this.month<=12 && this.year>0  
-				&& daySum[this.month] >= this.day) {
+		if(this.date.getDay()>0 && this.date.getMonth()>=1 && this.date.getMonth()<=12 && this.date.getYear()>0  
+				&& daySum[this.date.getMonth()] >= this.date.getDay()) {
 			flag = true;
 		}
 		
@@ -297,9 +295,9 @@ public class SlotDATE {
 	 */
 	public boolean isBefore(SlotDATE date) {
 		boolean flag = false;
-		if(this.day<date.day && this.month<date.month && this.year<date.year) flag = true;
-		else if(this.year==date.year && this.day<date.day && this.month<date.month) flag = true;
-		else if(this.year==date.year && this.month==date.month && this.day<date.day) flag = true;
+		if(this.date.getDay()<date.date.getDay() && this.date.getMonth()<date.date.getMonth() && this.date.getYear()<date.date.getYear()) flag = true;
+		else if(this.date.getYear()==date.date.getYear() && this.date.getDay()<date.date.getDay() && this.date.getMonth()<date.date.getMonth()) flag = true;
+		else if(this.date.getYear()==date.date.getYear() && this.date.getMonth()==date.date.getMonth() && this.date.getDay()<date.date.getDay()) flag = true;
 		
 		return flag;
 	}

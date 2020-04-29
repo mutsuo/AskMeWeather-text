@@ -51,7 +51,6 @@ public class BotClassification {
 		    e.printStackTrace();
 		}
 		
-//		System.out.println(utterance);
 		
 		if(res.equals("1")) return State.STATE_TASK_BOT;
 		else return State.STATE_CHAT_BOT;

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.bot.entity.module.dm.state.State;
 import com.bot.entity.module.dm.state.StateContent;
 import com.bot.entity.module.nlu.intent.Intent;
@@ -37,6 +39,8 @@ public class DMModule {
 	
 	private int turnId;
 	private int dialogId;
+	
+	static Logger logger = Logger.getLogger(DMModule.class);
 
 	/**
 	 * 
@@ -78,15 +82,23 @@ public class DMModule {
 				this.dialogueFinished();
 			}
 		}else {
+			//0. 意图修正
+//			intent = this.intentAmending(slot, intent, rawUtterance);
+//			logger.debug("amend the intent --> "+intent.getIntentName());
 			//1. 判断话题一致性
-			if(!dialogueTracer.isThemeChanged(botType, intent,this.turnId)) {{}
+			if(!dialogueTracer.isThemeChanged(botType, intent,this.turnId)) {
 				//话题一致：切换轮次
+				logger.debug("the same theme --> next turn");
 				this.nextTurn();			
 			}else {
 				//话题不一致：上一话题中断，开启新话题
+				logger.debug("theme changed");
 				this.dialogueInterrupted();
+				logger.debug("dialogue interrupted");
 				this.dialogueStarted();
+				logger.debug("new dialogue started");
 				this.nextTurn();
+				logger.debug("new turn");
 			}
 			
 			
@@ -97,12 +109,12 @@ public class DMModule {
 			state.setDialogId(this.dialogId);
 			state.setStateType(botType);
 			state.getStateContent().setRawUtterance(rawUtterance);
+			logger.debug("new state created");
 			
 			if(botType==State.STATE_TASK_BOT) {
-				//0. 意图修正
-				intent = this.intentAmending(slot, intent, rawUtterance);
 				//调用的是任务型bot				
 				//3(2-1). 判断意图和语义槽是否完整
+				logger.debug("start to judge wheather the slot and intent are complete...");
 				Intent lastIntent = this.dialogueTracer.getLastIntent();
 				policyInstr = this.policy.isIntentFilled(intent, lastIntent);
 				if(policyInstr==Policy.STATE_OK) {
@@ -111,40 +123,48 @@ public class DMModule {
 					policyInstr = this.policy.isSlotComplited(slot);
 					if(policyInstr==Policy.STATE_OK) {
 						//3-1(2-1-1). 完整
+						logger.debug("--> complete");
 						//创建查询、关闭对话（nlg）
 						//3-2(2-1-1). 判断日期是否合法
 						policyInstr = this.policy.isSlotLegal(slot); 
 					}else {
 						//3-1(2-1-2). 不完整：若上文中有，直接填充槽位；否则，创建追问响应（nlg）
+						logger.debug("--> isn't complete");
 						/*
 						 * 【注】仅在以下情况中，利用上文进行填充：
 						 * 1. 日期：上一次对话(Task based)查询为单日（只有单日查询才可能存在日期不完整的情况）
 						 * 2. 地点：继承上一次对话(Task based)
 						 */
-						if(policyInstr==20 || policyInstr==10) {
-							
+						if(policyInstr==20) {
+							logger.debug("date and loc are lost");
+							State lastStateDATE = dialogueTracer.getLastStateContainComplicatedDATE();
+							State lastStateLOC = dialogueTracer.getLastStateContainComplicatedLOC();
+							slot = fillDATE(lastStateDATE, slot, policyInstr);
+							if(lastStateLOC!=null) {
+								slot.setLoc(lastStateLOC.getStateContent().getSlot().getLoc());
+								policyInstr = Policy.STATE_OK;
+								logger.debug("loc has been filled");
+							}else {
+								policyInstr = Policy.INSTRUCTION_ERROR_LOC_LOST;
+								logger.debug("loc is lost");
+							}
+						}
+						else if(policyInstr==10) {
+							logger.debug("date is illigeal");
 						}
 						else if(policyInstr >10 && policyInstr<=15) {
 							//3-2(2-1). 日期不完整
+							logger.debug("date isn't complete");
 							//返回上一次对话的语义槽(Task based)
+							logger.debug("to get the last state from state stack...");
 							State lastState = dialogueTracer.getLastStateContainComplicatedDATE();
 							if(lastState!=null) {
-								switch(policyInstr) {
-								case Policy.INSTRUCTION_ERROR_DATE_LOST:
-									slot.setDate(lastState.getStateContent().getSlot().getDate());
-									break;
-								case Policy.INSTRUCTION_ERROR_DATE_DAY_LOST:
-									slot.getDate().get(0).get("start").setDay(lastState.getStateContent().getSlot().getDate().get(0).get("start").getDay());
-									break;
-								case Policy.INSTRUCTION_ERROR_DATE_MONTH_LOST:
-									slot.getDate().get(0).get("start").setMonth(lastState.getStateContent().getSlot().getDate().get(0).get("start").getMonth());
-									break;
-								case Policy.INSTRUCTION_ERROR_DATE_DAY_AND_MONTH_LOST:
-									slot.getDate().get(0).get("start").setDay(lastState.getStateContent().getSlot().getDate().get(0).get("start").getDay());
-									slot.getDate().get(0).get("start").setMonth(lastState.getStateContent().getSlot().getDate().get(0).get("start").getMonth());
-									break;
-								}
+								slot = fillDATE(lastState, slot, policyInstr); 
 								policyInstr = Policy.STATE_OK;
+								logger.debug("date has been filled");
+							}else {
+								policyInstr = Policy.INSTRUCTION_ERROR_DATE_LOST;
+								logger.debug("date is lost");
 							}
 							
 						}
@@ -153,16 +173,20 @@ public class DMModule {
 							policyInstr = this.policy.isSlotLegal(slot); 
 							if(policyInstr == Policy.STATE_OK) {
 								//支持日期范围：今天、未来6天，不支持过去时间
+								logger.debug("date is legal but loc is lost");
 								//3-4(2-1). 地点不完整
 								State lastState = dialogueTracer.getLastStateContainComplicatedLOC();
 								if(lastState!=null) {
 									slot.setLoc(lastState.getStateContent().getSlot().getLoc());
 									policyInstr = Policy.STATE_OK;
+									logger.debug("loc has been filled");
 								}else {
 									policyInstr = Policy.INSTRUCTION_ERROR_LOC_LOST;
+									logger.debug("loc is lost");
 								}
 							}else {
 								//不合法：1.日期不符合常识-->创建澄清响应（nlg）
+								logger.debug("date is illegal");
 							}
 						}
 					}
@@ -188,6 +212,28 @@ public class DMModule {
 		
 	}
 	
+	public Slot fillDATE(State lastState, Slot slot, int policyInstr) {
+		switch(policyInstr) {
+		case Policy.INSTRUCTION_ERROR_DATE_LOST:
+			slot.setDate(lastState.getStateContent().getSlot().getDate());
+			break;
+		case Policy.INSTRUCTION_ERROR_DATE_AND_LOC_LOST:
+			slot.setDate(lastState.getStateContent().getSlot().getDate());
+			break;
+		case Policy.INSTRUCTION_ERROR_DATE_DAY_LOST:
+			slot.getDate().get(0).get("start").setDay(lastState.getStateContent().getSlot().getDate().get(0).get("start").getDay());
+			break;
+		case Policy.INSTRUCTION_ERROR_DATE_MONTH_LOST:
+			slot.getDate().get(0).get("start").setMonth(lastState.getStateContent().getSlot().getDate().get(0).get("start").getMonth());
+			break;
+		case Policy.INSTRUCTION_ERROR_DATE_DAY_AND_MONTH_LOST:
+			slot.getDate().get(0).get("start").setDay(lastState.getStateContent().getSlot().getDate().get(0).get("start").getDay());
+			slot.getDate().get(0).get("start").setMonth(lastState.getStateContent().getSlot().getDate().get(0).get("start").getMonth());
+			break;
+		}
+		return slot;
+	}
+	
 	/**
 	 *@desc:意图修正<br>若语义槽占比≥50%，则承袭上一意图
 	 *@param slot
@@ -196,7 +242,7 @@ public class DMModule {
 	 *@return:Intent
 	 *@trhows
 	 */
-	private Intent intentAmending(Slot slot, Intent intent, String rawUtterance) {
+	public Intent intentAmending(Slot slot, Intent intent, String rawUtterance) {
 		Intent newIntent = null;
 		
 		//去掉语句中的停用词
@@ -231,6 +277,7 @@ public class DMModule {
 				if(map.get("start")!=null) dateLen += map.get("start").getEndIndex()-map.get("start").getStartIndex()+1;
 				if(map.get("end")!=null) dateLen += map.get("end").getEndIndex()-map.get("end").getStartIndex()+1;
 			}
+			System.out.println(1.0*(dateLen+locLen)/uttLen);
 			if(1.0*(dateLen+locLen)/uttLen>=0.5) {
 				State lastState = dialogueTracer.getLastUserState();
 				if(lastState!=null && lastState.getStateContent().getIntent()!=null) newIntent = lastState.getStateContent().getIntent();

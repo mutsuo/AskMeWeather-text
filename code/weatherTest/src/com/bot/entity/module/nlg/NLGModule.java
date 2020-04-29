@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 import com.bot.entity.module.dm.Policy;
 import com.bot.entity.module.nlu.intent.Intent;
 import com.bot.entity.module.nlu.slot.Slot;
@@ -27,6 +29,7 @@ import net.sf.json.JSONObject;
  */
 public class NLGModule {
 	private static NLGModule instance = new NLGModule();
+	public static Logger logger = Logger.getLogger(NLGModule.class);
 	/**
 	 * 
 	 */
@@ -72,6 +75,9 @@ public class NLGModule {
 		case Policy.INSTRUCTION_ERROR_DATE_UNSUPPORT:
 			reply.add(this.dateUnsupportedReply());
 			break;
+		case Policy.INSTRUCTION_ERROR_DATE_LOST:
+			reply.add(this.dateLostReply(intent));
+			break;
 		case Policy.INSTRUCTION_ERROR_DATE_AND_LOC_LOST:
 			reply.add(dateAndLocLostReply(intent));
 			break;
@@ -83,6 +89,21 @@ public class NLGModule {
 		return reply;
 	}
 	
+	/**
+	 *@desc:一句话描述
+	 *@param intent
+	 *@return
+	 *@return:String
+	 *@trhows
+	 */
+	private String dateLostReply(Intent intent) {
+		StringBuffer reply = new StringBuffer();
+		reply.append("查哪天的");
+		reply.append(intent.getIntentName());
+		reply.append("呀");
+		return reply.toString();
+	}
+
 	/**
 	 * 
 	 *@desc:安全回复
@@ -96,6 +117,24 @@ public class NLGModule {
 		return replys[rand.nextInt(replys.length-1)];
 	}
 
+	public String unsupportedReply(String date, String intentName) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("抱歉，我这里没有");
+		String recentDate = isRecent(date); 
+		if(recentDate.equals("")) sb.append(date);
+		else sb.append(recentDate);
+		sb.append("的");
+		sb.append(intentName);
+		sb.append("数据");
+		return sb.toString();
+	}
+	/***
+	 * 
+	 *@desc:问候
+	 *@return
+	 *@return:String
+	 *@trhows
+	 */
 	public String greeting() {
 		String[] replys = {"你好呀\\(@^0^@)/","哈喽~"};
 		Random rand = new Random();
@@ -236,125 +275,478 @@ public class NLGModule {
 		}else if(dayInfo[0].equals(todayDate[0]) && dayInfo[1].equals(todayDate[1]) 
 				&& Integer.parseInt(dayInfo[2])==Integer.parseInt(todayDate[2])+1) {
 			recen = "明天";
+		}else if(dayInfo[0].equals(todayDate[0]) && dayInfo[1].equals(todayDate[1]) 
+				&& Integer.parseInt(dayInfo[2])==Integer.parseInt(todayDate[2])+2) {
+			recen = "后天";
 		}
 		
 		return recen;
 	}
 
-	/**
-		 *@desc: 任务型，语义槽完整时的回复
-		 *@param intent
-		 *@param slot
-		 *@return
-		 *@return:String
-		 * @throws Exception 
-		 *@trhows
-		 */
-		public List<String> taskBasedCommonReply(Intent intent, Slot slot) throws Exception {
+	/***
+	 * 
+	 *@desc:网络故障回复
+	 *@return
+	 *@return:String
+	 *@trhows
+	 */
+	public String netErrorReply() {
+		return "抱歉，由于网络故障，无法接收到响应";
+	}
+	
+	public List<String> taskBasedCommonReply(Intent intent, Slot slot) throws Exception {
 			WeatherService service = WeatherService.getInstance();
-			Map<String, Map<String, String>> map = service.apiQuery(intent, slot);
+			List<WeatherInfo> list = service.apiQuery(WeatherService.XIN_ZHI_TIAN_QI, intent, slot);
+			List<String> replys = null;
 			
-			List<String> replys = new ArrayList<String>();
-			Random rand = new Random();
-			for(Entry<String, Map<String, String>> entry: map.entrySet()) {
-				String date = isRecent(entry.getKey());
-				if(date.equals("") && entry.getKey()!=null) {
-					String[] d = entry.getKey().split("-"); 
-					date = d[1]+"月"+d[2]+"日";
-				}
-				
-				String loc = slot.getLoc().getName();
-				
-				String weather = "";
-				if(entry.getValue().get("weather")!=null) weather = entry.getValue().get("weather");
-				else{
-					if(entry.getValue().get("weather_day")!=null && entry.getValue().get("weather_night")!=null) {
-						weather = entry.getValue().get("weather_day") + "转" +entry.getValue().get("weather_night");					
-					}else {
-						if(entry.getValue().get("weather_day")!=null) weather = entry.getValue().get("weather_day");
-						if(entry.getValue().get("weather_night")!=null) weather = entry.getValue().get("weather_night");
-					}
-				}
-				
-				String tempLow = "";
-				if(entry.getValue().get("templow")!=null) tempLow = entry.getValue().get("templow");
-							
-				String tempHigh = "";
-				if(entry.getValue().get("temphigh")!=null) tempHigh = entry.getValue().get("templow");
-				
-				String tempDay = "";
-				if(entry.getValue().get("templow_day")!=null) tempDay = entry.getValue().get("templow_day");
-				
-				String tempNight = "";
-				if(entry.getValue().get("templow_night")!=null) tempNight = entry.getValue().get("templow_night");
-				
-				String index = "";
-				if(entry.getValue().get("index")!=null) index = entry.getValue().get("index");
-				
-				StringBuffer buffer = new StringBuffer();
-				buffer.append(loc);
-				buffer.append(date);
-				buffer.append(weather);
-				buffer.append(",");
-				if(!tempHigh.equals("") && !tempLow.equals("")) {
-					buffer.append(tempLow);
-					buffer.append("℃到");
-					buffer.append(tempHigh);
-					buffer.append("℃");
-				}else {
-					if(!tempHigh.equals("")) {
-						buffer.append("最高温为");
-						buffer.append(tempHigh);
-						buffer.append("℃");
-					}
-					else if(!tempLow.equals("")) {
-						buffer.append("最低温为");
-						buffer.append(tempLow);
-						buffer.append("℃");
-					}
-					else if(!tempDay.equals("") && !tempNight.equals("")) {
-						buffer.append("白天最低");
-						buffer.append(tempDay);
-						buffer.append("摄氏度，");
-						buffer.append("夜间最低");
-						buffer.append(tempNight);
-						buffer.append("摄氏度");
-					}else {
-						int highTemp = -1, lowTemp = -1;
-						if(!tempDay.equals("")) {
-							highTemp = Integer.parseInt(tempDay);
-	//						buffer.append("白天最低");
-	//						buffer.append(tempDay);
-	//						buffer.append("摄氏度");
-						}else if(!tempNight.equals("")){
-							lowTemp = Integer.parseInt(tempNight);
-	//						buffer.append("夜间最低");
-	//						buffer.append(tempNight);
-	//						buffer.append("摄氏度");
-						}
-						if(highTemp!=-1 && lowTemp!=-1) {
-							if(highTemp < lowTemp) {
-								int t = highTemp;
-								highTemp = lowTemp;
-								lowTemp = t;
-							}
-							buffer.append(lowTemp);
-							buffer.append("至");
-							buffer.append(highTemp);
-							buffer.append("摄氏度");
-						}
-					}
-				}
-				buffer.append("\n");
-				if(!index.equals("")) buffer.append(index);
-				
-				replys.add(buffer.toString());
+			if(list == null) {
+				replys.add(netErrorReply());
+			}else {
+				if(intent.getIntentId().equals(Intent.WEATHER)) replys = weatherReply(slot, list);
+				else if(intent.getIntentId().equals(Intent.TEMPERATURE)) replys = tempReply(slot, list);
+				else if(intent.getIntentId().equals(Intent.TEMPERATURE_RANGE)) replys = tempRangeReply(slot, list);
+				else if(intent.getIntentId().charAt(0)=='L') replys = lifeIndexReply(slot, list);
+				else if(intent.getIntentId().charAt(0)=='X') replys = restrictionReply(slot, list);
+				else replys = otherReply(slot, list, intent);
 			}
 			
 			
 			return replys;
 		}
+		
+		/**
+	 *@desc:一车辆限行
+	 *@param slot
+	 *@param list
+	 *@return
+	 *@return:List<String>
+	 *@trhows
+	 */
+	private List<String> restrictionReply(Slot slot, List<WeatherInfo> list) {
+		List<String> replys = new ArrayList<String>();
+		if(list.size()==0) replys.add("没有相关的限行信息，可以自由出行");
+		for(WeatherInfo wi: list) {
+			String date = isRecent(wi.getDate().getFormatedDate());
+			if(date.equals("")) date = wi.getDate().getMonth()+"月"+wi.getDate().getDay()+"日";
+			
+			String loc = slot.getLoc().getName();
+			
+			StringBuffer sb = new StringBuffer();
+			if(wi.getRestriction().size()==0) {
+				sb.append("没有相关的限行信息，可以自由出行");
+			}else {
+				sb.append(loc);
+				sb.append(date);
+				sb.append("的车辆限行信息如下：\n");
+				sb.append(wi.getRestriction().get("penalty"));
+				sb.append("\n限行范围为");
+				sb.append(wi.getRestriction().get("region"));
+				sb.append("\n");
+				if(wi.getRestriction().get("remark")!=null) {
+					sb.append(wi.getRestriction().get("remark"));
+					sb.append("\n");
+				}
+				sb.append(wi.getRestriction().get("memo"));
+				if(wi.getRestriction().get("plates")!=null) {
+					sb.append("：");
+					sb.append(wi.getRestriction().get("plates"));
+				}
+			}
+			replys.add(sb.toString());
+		}
+		
+		return replys;
+	}
 
+		/**
+	 *@desc:生活指数
+	 *@param slot
+	 *@param list
+	 *@return
+	 *@return:List<String>
+	 *@trhows
+	 */
+	private List<String> lifeIndexReply(Slot slot, List<WeatherInfo> list) {
+		List<String> replys = new ArrayList<String>();
+		StringBuffer sb = new StringBuffer();
+		
+		if(list.get(0).getIndex().get("detail")!=null) {
+			sb.append(slot.getLoc().getName());
+			sb.append("今天");
+			sb.append(list.get(0).getIndex().get("detail"));
+			replys.add(sb.toString());
+		}
+		
+		return replys;
+	}
+
+		/**
+	 *@desc: 温差
+	 *@param slot
+	 *@param list
+	 *@return
+	 *@return:List<String>
+	 *@trhows
+	 */
+	public List<String> tempRangeReply(Slot slot, List<WeatherInfo> list) {
+		List<String> replys = new ArrayList<String>();
+		
+		for(WeatherInfo wi: list) {
+			String date = isRecent(wi.getDate().getFormatedDate());
+			if(date.equals("")) date = wi.getDate().getMonth()+"月"+wi.getDate().getDay()+"日";
+			
+			String loc = slot.getLoc().getName();
+			
+			int tempRange = -1;
+			
+			String tempHigh = wi.getMaxTem();
+			String tempLow = wi.getMinTem();
+			
+			if(!tempHigh.equals("") && !tempLow.equals("")) {
+				tempRange = Integer.parseInt(tempHigh) - Integer.parseInt(tempLow);
+				if(tempRange > 0) {
+					StringBuffer sb = new StringBuffer();
+					sb.append(loc);
+					sb.append(date);
+					sb.append("的温差为");
+					sb.append(tempRange);
+					sb.append("摄氏度");
+					
+					replys.add(sb.toString());
+				}else {
+					replys.add(unsupportedReply(date, "温差"));
+				}
+			}else {
+				replys.add(unsupportedReply(date, "温差"));
+			}
+			
+		}
+		return replys;
+	}
+
+		/**
+				 *@desc: 任务型，语义槽完整时的回复
+				 *@param intent
+				 *@param slot
+				 *@return
+				 *@return:String
+				 * @throws Exception 
+				 *@trhows
+				 */
+		//		public List<String> taskBasedCommonReply1(Intent intent, Slot slot) throws Exception {
+		//			WeatherService service = WeatherService.getInstance();
+		//			List<WeatherInfo> list = service.apiQuery(WeatherService.JISU, intent, slot);
+		//			
+		//			List<String> replys = new ArrayList<String>();
+		//			Random rand = new Random();
+		//			for(Entry<String, Map<String, String>> entry: map.entrySet()) {
+		//				String date = isRecent(entry.getKey());
+		//				if(date.equals("") && entry.getKey()!=null) {
+		//					String[] d = entry.getKey().split("-"); 
+		//					date = d[1]+"月"+d[2]+"日";
+		//				}
+		//				
+		//				String loc = slot.getLoc().getName();
+		//				
+		//				String weather = "";
+		//				if(entry.getValue().get("weather")!=null) weather = entry.getValue().get("weather");
+		//				else{
+		//					if(entry.getValue().get("weather_day")!=null && entry.getValue().get("weather_night")!=null) {
+		//						weather = entry.getValue().get("weather_day") + "转" +entry.getValue().get("weather_night");					
+		//					}else {
+		//						if(entry.getValue().get("weather_day")!=null) weather = entry.getValue().get("weather_day");
+		//						if(entry.getValue().get("weather_night")!=null) weather = entry.getValue().get("weather_night");
+		//					}
+		//				}
+		//				
+		//				String tempLow = "";
+		//				if(entry.getValue().get("templow")!=null) tempLow = entry.getValue().get("templow");
+		//							
+		//				String tempHigh = "";
+		//				if(entry.getValue().get("temphigh")!=null) tempHigh = entry.getValue().get("templow");
+		//				
+		//				String tempDay = "";
+		//				if(entry.getValue().get("templow_day")!=null) tempDay = entry.getValue().get("templow_day");
+		//				
+		//				String tempNight = "";
+		//				if(entry.getValue().get("templow_night")!=null) tempNight = entry.getValue().get("templow_night");
+		//				
+		//				String index = "";
+		//				if(entry.getValue().get("index")!=null) index = entry.getValue().get("index");
+		//				
+		//				StringBuffer buffer = new StringBuffer();
+		//				buffer.append(loc);
+		//				buffer.append(date);
+		//				buffer.append(weather);
+		//				buffer.append(",");
+		//				if(!tempHigh.equals("") && !tempLow.equals("")) {
+		//					buffer.append(tempLow);
+		//					buffer.append("℃到");
+		//					buffer.append(tempHigh);
+		//					buffer.append("℃");
+		//				}else {
+		//					if(!tempHigh.equals("")) {
+		//						buffer.append("最高温为");
+		//						buffer.append(tempHigh);
+		//						buffer.append("℃");
+		//					}
+		//					else if(!tempLow.equals("")) {
+		//						buffer.append("最低温为");
+		//						buffer.append(tempLow);
+		//						buffer.append("℃");
+		//					}
+		//					else if(!tempDay.equals("") && !tempNight.equals("")) {
+		//						buffer.append("白天最低");
+		//						buffer.append(tempDay);
+		//						buffer.append("摄氏度，");
+		//						buffer.append("夜间最低");
+		//						buffer.append(tempNight);
+		//						buffer.append("摄氏度");
+		//					}else {
+		//						int highTemp = -1, lowTemp = -1;
+		//						if(!tempDay.equals("")) {
+		//							highTemp = Integer.parseInt(tempDay);
+		//	//						buffer.append("白天最低");
+		//	//						buffer.append(tempDay);
+		//	//						buffer.append("摄氏度");
+		//						}else if(!tempNight.equals("")){
+		//							lowTemp = Integer.parseInt(tempNight);
+		//	//						buffer.append("夜间最低");
+		//	//						buffer.append(tempNight);
+		//	//						buffer.append("摄氏度");
+		//						}
+		//						if(highTemp!=-1 && lowTemp!=-1) {
+		//							if(highTemp < lowTemp) {
+		//								int t = highTemp;
+		//								highTemp = lowTemp;
+		//								lowTemp = t;
+		//							}
+		//							buffer.append(lowTemp);
+		//							buffer.append("至");
+		//							buffer.append(highTemp);
+		//							buffer.append("摄氏度");
+		//						}
+		//					}
+		//				}
+		//				buffer.append("\n");
+		//				if(!index.equals("")) buffer.append(index);
+		//				
+		//				replys.add(buffer.toString());
+		//			}
+		//			
+		//			
+		//			return replys;
+		//		}
+				
+	public List<String> weatherReply(Slot slot, List<WeatherInfo> list){
+		List<String> replys = new ArrayList<String>();
+		for(WeatherInfo wi: list) {
+			String date = isRecent(wi.getDate().getFormatedDate());
+			if(date.equals("")) date = wi.getDate().getMonth()+"月"+wi.getDate().getDay()+"日";
+			
+			String loc = slot.getLoc().getName();
+			
+			String weather = "";
+			if(!wi.getWeather().equals("")) weather = wi.getWeather();
+			else{
+				if(!wi.getDay().getWeather().equals("") && !wi.getNight().getWeather().equals("")) {
+					if(!wi.getDay().getWeather().equals(wi.getNight().getWeather()))
+						weather = wi.getDay().getWeather() + "转" + wi.getNight().getWeather();
+					else weather = wi.getDay().getWeather();
+				}else {
+					if(!wi.getDay().getWeather().equals("")) weather = wi.getDay().getWeather();
+					if(!wi.getNight().getWeather().equals("")) weather = wi.getNight().getWeather();
+				}
+			}
+			
+			String tempLow = wi.getMinTem();
+			String tempHigh = wi.getMaxTem();
+			
+			String tempDay = "";
+			if(wi.getDay()!=null) wi.getDay().getMaxTem();
+			
+			String tempNight = "";
+			if(wi.getNight()!=null) wi.getNight().getMinTem();
+			
+//				String index = "";
+//				if(entry.getValue().get("index")!=null) index = entry.getValue().get("index");
+			
+			StringBuffer buffer = new StringBuffer();
+			buffer.append(loc);
+			buffer.append(date);
+			buffer.append(weather);
+			buffer.append(",");
+			if(!wi.getNowTem().equals("")) {
+				buffer.append(wi.getNowTem());
+				buffer.append("摄氏度");
+			}
+			else if(!tempHigh.equals("") && !tempLow.equals("")) {
+				if(!tempHigh.equals(tempLow)) {
+					buffer.append(tempLow);
+					buffer.append("℃到");
+					buffer.append(tempHigh);
+					buffer.append("℃");
+				}else {
+					buffer.append(tempLow);
+					buffer.append("℃");
+				}
+				
+			}else {
+				if(!tempHigh.equals("")) {
+					buffer.append("最高温为");
+					buffer.append(tempHigh);
+					buffer.append("℃");
+				}
+				else if(!tempLow.equals("")) {
+					buffer.append("最低温为");
+					buffer.append(tempLow);
+					buffer.append("℃");
+				}
+				else if(!tempDay.equals("") && !tempNight.equals("")) {
+					buffer.append("白天最低");
+					buffer.append(tempDay);
+					buffer.append("摄氏度，");
+					buffer.append("夜间最低");
+					buffer.append(tempNight);
+					buffer.append("摄氏度");
+				}else {
+					int highTemp = -1, lowTemp = -1;
+					if(!tempDay.equals("")) {
+						highTemp = Integer.parseInt(tempDay);
+//						buffer.append("白天最低");
+//						buffer.append(tempDay);
+//						buffer.append("摄氏度");
+					}else if(!tempNight.equals("")){
+						lowTemp = Integer.parseInt(tempNight);
+//						buffer.append("夜间最低");
+//						buffer.append(tempNight);
+//						buffer.append("摄氏度");
+					}
+					if(highTemp!=-1 && lowTemp!=-1) {
+						if(highTemp < lowTemp) {
+							int t = highTemp;
+							highTemp = lowTemp;
+							lowTemp = t;
+						}
+						buffer.append(lowTemp);
+						buffer.append("至");
+						buffer.append(highTemp);
+						buffer.append("摄氏度");
+					}else {
+						if(highTemp!=-1) {
+							buffer.append(highTemp);
+							buffer.append("摄氏度");
+						}else if(lowTemp!=-1) {
+							buffer.append(lowTemp);
+							buffer.append("摄氏度");
+						}
+					}
+				}
+			}
+//				buffer.append("\n");
+//				if(!index.equals("")) buffer.append(index);
+			
+			replys.add(buffer.toString());
+		}
+		
+		return replys;
+	}
+
+	/***
+	 * 
+	 *@desc:其它气象数据
+	 *@param slot
+	 *@param list
+	 *@return
+	 *@return:List<String>
+	 *@trhows
+	 */
+	public List<String> otherReply(Slot slot, List<WeatherInfo> list, Intent intent){
+		List<String> replys = new ArrayList<String>();
+		for(WeatherInfo wi: list) {
+			String date = isRecent(wi.getDate().getFormatedDate());
+			if(date.equals("")) date = wi.getDate().getMonth()+"月"+wi.getDate().getDay()+"日";
+			
+			String data = "";
+			if(intent.getIntentName().equals(Intent.VISIBILITY)) data = wi.getVisibility();
+			else if(intent.getIntentName().equals(Intent.HUMIDITY)) data = wi.getHumidity();
+			else if(intent.getIntentName().equals(Intent.WIND_DIR)) data = wi.getWindDir();
+			else if(intent.getIntentName().equals(Intent.WIND_SPEED)) data = wi.getWindSpeed();
+			else if(intent.getIntentName().equals(Intent.WIND_POWER)) data = wi.getWindPower();
+			
+			if(data.equals("")) {
+				replys.add(this.unsupportedReply(wi.getDate().getFormatedDate(), intent.getIntentName()));
+			}else {
+				StringBuffer sb = new StringBuffer();
+				String loc = "";
+				loc = slot.getLoc().getName();
+				
+				sb.append(loc);
+				sb.append(date);
+				sb.append("的");
+				sb.append(intent.getIntentName());
+				sb.append("为");
+				sb.append(data);
+				
+				replys.add(sb.toString());
+			}
+		}
+		
+		return replys;
+	}
+	
+	/***
+	 * 
+	 *@desc:温度
+	 *@param slot
+	 *@param list
+	 *@return
+	 *@return:List<String>
+	 *@trhows
+	 */
+	public List<String> tempReply(Slot slot, List<WeatherInfo> list){
+		List<String> replys = new ArrayList<String>();
+		
+		for(WeatherInfo wi: list) {
+			String date = isRecent(wi.getDate().getFormatedDate());
+			if(date.equals("")) date = wi.getDate().getMonth()+"月"+wi.getDate().getDay()+"日";
+			
+			String loc = "";
+			loc = slot.getLoc().getName();
+			
+			String tempHigh = "";
+			if(!wi.getMaxTem().equals("")) tempHigh = wi.getMaxTem();
+			
+			String tempLow = "";
+			if(!wi.getMinTem().equals("")) tempLow = wi.getMinTem();
+			
+			String tempDay = "";
+			if(wi.getDay()!=null && !wi.getDay().getMaxTem().equals("")) tempDay = wi.getDay().getMaxTem();
+			
+			String tempNight = "";
+			if(wi.getNight()!=null && !wi.getNight().getMinTem().equals("")) tempNight = wi.getNight().getMinTem();
+			
+			String tempRange = "";
+			if(!tempHigh.equals("") && !tempLow.equals("")) tempRange = tempLow + "至" + tempHigh + "摄氏度";
+			else if(!tempDay.equals("") && !tempNight.equals("")) tempRange = tempNight + "至" + tempDay + "摄氏度";
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append(loc);
+			sb.append(date);
+			sb.append("的温度为");
+			sb.append(tempRange);
+			sb.append("。");
+			if(!wi.getNowTem().equals("")) {
+				sb.append("\n当前温度为");
+				sb.append(wi.getNowTem());
+				sb.append("摄氏度");
+			}
+			replys.add(sb.toString());
+		}
+		
+		return replys;
+	}
+		
 	/**
 	 * 
 	 *@desc:调用api创建闲聊应答

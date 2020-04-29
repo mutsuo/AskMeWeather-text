@@ -64,8 +64,10 @@ public class NLUModule {
 	 *@trhows
 	 */
 	public Intent intentDtection(String utterance) {
+		Intent intent = null;
+		
 		//1. ¹Ø¼ü´ÊÌ½²â
-		Intent intent = intentDetector.intentDetectionKeywords(utterance);
+		intent = intentDetector.intentDetectionKeywords(utterance);
 		//2. CNNÍøÂç·ÖÀà
 		if(intent==null) {
 			intent = intentDetector.intentDetectionCNN(utterance);

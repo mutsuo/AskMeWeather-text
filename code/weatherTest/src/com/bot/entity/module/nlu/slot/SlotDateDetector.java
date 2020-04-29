@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -34,6 +35,8 @@ public class SlotDateDetector {
 	private static final String FILE_DIR = "F:/data temp/";
 	private static final String FILE_NAME = "相对时间词表.xls";
 	private static final String FILE_PATH = FILE_DIR + FILE_NAME;
+	
+	static Logger logger = Logger.getLogger(SlotDateDetector.class);
 	/**
 	 * 
 	 */
@@ -70,13 +73,34 @@ public class SlotDateDetector {
 		//在线正则表达式测试：https://c.runoob.com/front-end/854
 		
 		//1. 预识别、预标准化
+		logger.debug("start to detect date...");
 		List<Map<String, SlotDATE>> recognitionDate = preRecognition(utterance);
+		for(Map<String, SlotDATE> map: recognitionDate) {
+			if(map!=null) {
+				if(map.get("start")!=null && map.get("end")!=null) {
+					logger.debug("date: from "+map.get("start").getFormatedDate()+"to "+map.get("end").getFormatedDate());
+				}else if(map.get("start")!=null) {
+					logger.debug("date: "+map.get("start").getFormatedDate());
+				}
+			}
+		}
 		
 		//2. 检测相对时间短语
+		logger.debug("start to detect relative time phrase...");
 		List<Map<String, SlotDATE>> relativeTimePhrase = relativeTimePhraseRecognition(utterance);
+		for(Map<String, SlotDATE> map: relativeTimePhrase) {
+			if(map!=null) {
+				if(map.get("start")!=null && map.get("end")!=null) {
+					logger.debug("date: from "+map.get("start").getFormatedDate()+"to "+map.get("end").getFormatedDate());
+				}else if(map.get("start")!=null) {
+					logger.debug("date: "+map.get("start").getFormatedDate());
+				}
+			}
+		}
 		
 		//3. 补全
 		//3-0. 相对时间短语填充：将相对时间短语和绝对时间短语合并
+		logger.debug("start to complete time phrase...");
 		if(relativeTimePhrase.size()!=0) {
 			if(recognitionDate.size()==0) {
 				for(Map<String, SlotDATE>relativeMap: relativeTimePhrase) {
@@ -92,7 +116,7 @@ public class SlotDateDetector {
 						recognitionDate1.add(newMap);
 					}
 					int index = 0;
-					boolean flag = false;{}
+					boolean flag = false;
 					for(Map<String, SlotDATE>recoMap: recognitionDate1) {
 						SlotDATE startDate = recoMap.get("start");
 						SlotDATE endDate = recoMap.get("end");

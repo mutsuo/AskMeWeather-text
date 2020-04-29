@@ -14,7 +14,7 @@ import com.bot.entity.Bot;
  *@date:2020年2月17日下午3:01:33
  */
 public class BotTest {
-
+ 
 	/**
 	 *@desc:一句话描述
 	 *@param args
@@ -28,9 +28,11 @@ public class BotTest {
 		String utterance = sc.next();
 		while(!utterance.equals("退出")) {
 			List<String> replys = bot.start(utterance);
+			System.out.println("\n----------------------------------------------------------------");
 			for(String reply: replys) {
 				System.out.println(reply);
 			}
+			System.out.println("----------------------------------------------------------------\n");
 			utterance = sc.next();
 		}
 		

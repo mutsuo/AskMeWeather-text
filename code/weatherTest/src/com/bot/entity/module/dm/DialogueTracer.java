@@ -6,6 +6,8 @@ package com.bot.entity.module.dm;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.bot.entity.module.dm.state.State;
 import com.bot.entity.module.nlu.intent.Intent;
 import com.bot.entity.module.nlu.slot.SlotDATE;
@@ -19,6 +21,7 @@ import com.bot.entity.util.StateStack;
 public class DialogueTracer {
 	private static DialogueTracer instance = new DialogueTracer();
 	private StateStack stateStack = StateStack.getInstance();
+	static Logger logger = Logger.getLogger(DialogueTracer.class);
 	/**
 	 * 
 	 */
@@ -95,19 +98,24 @@ public class DialogueTracer {
 			int n = stateStack.size()-1;
 			while(n>=0) {
 				State state = stateStack.get(n);
-				if(state.getRole()==State.ROLE_USER	&& state.getStateType()==State.STATE_TASK_BOT) {
+				if(state.getRole()==State.ROLE_USER	&& state.getStateType()==State.STATE_TASK_BOT
+						&& state.getStateContent().getSlot().getDate().size() == 1
+						&& state.getStateContent().getSlot().getDate().get(0).get("start") != null
+						&& state.getStateContent().getSlot().getDate().get(0).get("end") == null
+						&& state.getStateContent().getSlot().getDate().get(0).get("start").isFilled()) {
 					break;
 				}
 				n--;
 			}
 			if(n>=0) {
-				List<Map<String, SlotDATE>> dateList = stateStack.get(n).getStateContent().getSlot().getDate();
-				if(dateList.size()==1
-						&& dateList.get(0).get("end")==null
-						&& dateList.get(0).get("start")!=null
-						&& dateList.get(0).get("start").isFilled()) {
-					lastState = new State(stateStack.get(n));
-				}
+				logger.debug("last user state has been found");
+				lastState = new State(stateStack.get(n));
+//				List<Map<String, SlotDATE>> dateList = stateStack.get(n).getStateContent().getSlot().getDate();
+//				if(dateList.size()==1
+//						&& dateList.get(0).get("end")==null
+//						&& dateList.get(0).get("start")!=null
+//						&& dateList.get(0).get("start").isFilled()) {
+//				}
 			}
 		}
 		
@@ -128,8 +136,10 @@ public class DialogueTracer {
 			//找到第一个非系统状态
 			int n = stateStack.size()-1;
 			while(n>=0) {
+				logger.debug("last user state has been found");
 				State state = stateStack.get(n);
-				if(state.getRole()==State.ROLE_USER	&& state.getStateType()==State.STATE_TASK_BOT) {
+				if(state.getRole()==State.ROLE_USER	&& state.getStateType()==State.STATE_TASK_BOT
+						&& !state.getStateContent().getSlot().getLoc().getName().equals("ROOT")) {
 					break;
 				}
 				n--;

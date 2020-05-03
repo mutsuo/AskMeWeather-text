@@ -7,9 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hebeishida.common.UserInfo;
 import com.hebeishida.entity.Login;
 import com.hebeishida.entity.Person;
 import com.hebeishida.user.service.UserService;
+
+import net.sf.json.JSONObject;
+
 
 @Controller
 public class UserControl {
@@ -46,14 +50,18 @@ public class UserControl {
 		if (!pass.equals(login.getPassword())) {
 			return "index";
 		}
-		Person person = userService.personByTel(tel);
+		Person person = login.getPerson();
 		// 将用户信息保存到application
 		//ServletContext application=request.getServletContext();
-		request.setAttribute("person", person);
-		return "demo";
+		request.setAttribute("login", login);
+		JSONObject res=new JSONObject();
+		res.put("code", 1);
+		UserInfo userInfo=new UserInfo(person);
+		res.put("userInfo", userInfo.toJson());
+		System.out.println("=========="+res.toString());
+//		return "forward:/getMenu";
+		return "forward:/getOrderList";
 	}
 
-	public UserControl() {
-	}
 
 }

@@ -67,5 +67,10 @@ public class Person {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Person [username=" + username + ", birthday=" + birthday + ", city=" + city + "]";
+	}
+
 }

@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>登录成功</div>
-	<div>${person.username}</div>
+	<div>${result}</div>
 </body>
 </html>

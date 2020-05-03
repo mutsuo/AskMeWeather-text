@@ -9,5 +9,6 @@
 <body>
 	<div><a href="register.jsp">点击注册</a></div>
 	<div><a href="login.jsp">点击登录</a></div>
+	<div>测试过程，实现了从登录到购买的一系列流程</div>
 </body>
 </html>

@@ -29,19 +29,19 @@ public class UserDao {
 	// 用户注册后，插入login表
 	public void insertLogin(Login login) {
 		Session session = this.sessionFactory.getCurrentSession();
-		//Transaction tran = session.beginTransaction();
+		// Transaction tran = session.beginTransaction();
 		session.save(login);
 		session.flush();
-		//tran.commit();
+		// tran.commit();
 	}
 
 	// 用户注册后，插入register表
 	public void insertRegister(Person person) {
 		Session session = this.sessionFactory.getCurrentSession();
-		//Transaction tran = session.beginTransaction();
+		// Transaction tran = session.beginTransaction();
 		session.save(person);
 		session.flush();
-		//tran.commit();
+		// tran.commit();
 	}
 
 	// 通过电话tel，获取用户登录信息
@@ -50,12 +50,13 @@ public class UserDao {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = session.createQuery(sql);
 		query.setString(0, tel);
-		Login login=(Login) query.uniqueResult();
+		Login login = (Login) query.uniqueResult();
 		return login;
 	}
-	
-	//通过电话Tel，获取用户的详细信息
+
+	// 通过电话Tel，获取用户的详细信息
 	public Person getPersonByTel(String tel) {
 		return getLoginByTel(tel).getPerson();
 	}
+
 }

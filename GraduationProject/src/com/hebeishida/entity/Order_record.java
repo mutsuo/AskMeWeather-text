@@ -1,23 +1,30 @@
 package com.hebeishida.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="order_record")
 public class Order_record {
 	private int id;
-	private int M_id;
-	private int T_id;
-	private Timestamp creat_time;
-	private Timestamp ent_time;
+	//private int M_id;
+	//private int T_id;
+	private Date create_time;
+	private Date end_time;
 	private int status;
-	private int pay_way;
+	private String pay_way;
+	private String order_no;
+	
+	private Order_menu order_menu;
+	private Login login;
 	
 	public Order_record() {
 	}
@@ -32,36 +39,20 @@ public class Order_record {
 		this.id = id;
 	}
 
-	public int getM_id() {
-		return M_id;
+	public Date getCreate_time() {
+		return create_time;
 	}
 
-	public void setM_id(int m_id) {
-		M_id = m_id;
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
 
-	public int getT_id() {
-		return T_id;
+	public Date getEnd_time() {
+		return end_time;
 	}
 
-	public void setT_id(int t_id) {
-		T_id = t_id;
-	}
-
-	public Timestamp getCreat_time() {
-		return creat_time;
-	}
-
-	public void setCreat_time(Timestamp creat_time) {
-		this.creat_time = creat_time;
-	}
-
-	public Timestamp getEnt_time() {
-		return ent_time;
-	}
-
-	public void setEnt_time(Timestamp ent_time) {
-		this.ent_time = ent_time;
+	public void setEnd_time(Date end_time) {
+		this.end_time = end_time;
 	}
 
 	public int getStatus() {
@@ -72,13 +63,40 @@ public class Order_record {
 		this.status = status;
 	}
 
-	public int getPay_way() {
+	public String getPay_way() {
 		return pay_way;
 	}
 
-	public void setPay_way(int pay_way) {
+	public void setPay_way(String pay_way) {
 		this.pay_way = pay_way;
 	}
-
 	
+	public String getOrder_no() {
+		return order_no;
+	}
+
+	public void setOrder_no(String order_no) {
+		this.order_no = order_no;
+	}
+
+	@OneToOne
+	@JoinColumn(name="M_id")
+	public Order_menu getOrder_menu() {
+		return order_menu;
+	}
+
+	public void setOrder_menu(Order_menu order_menu) {
+		this.order_menu = order_menu;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="T_id")
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
 }

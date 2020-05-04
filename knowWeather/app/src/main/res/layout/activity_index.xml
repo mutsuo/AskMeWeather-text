@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.IndexActivity"
+    android:id="@+id/refreshLayout"
+    >
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+<RelativeLayout
+    android:background="@color/Sunny"
+    android:id="@+id/index_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ImageButton
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ibt_munu"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#00000000"
+        android:scaleType="fitXY"
+        android:src="@drawable/munu" />
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true">
+    <TextView
+        android:textColor="@color/Sunny_f"
+        android:layout_centerHorizontal="true"
+        android:text="1月1日（一）"
+        android:id="@+id/tv_time"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
+    <TextView
+        android:id="@+id/city"
+        android:layout_centerHorizontal="true"
+        android:text="石家庄"
+        android:textColor="@color/Sunny_f"
+        android:layout_below="@id/tv_time"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"/>
+    <ImageView
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/tv_time"
+        android:layout_toRightOf="@id/city"
+        android:src="@drawable/location"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+    <RelativeLayout
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/city"
+        android:id="@+id/rv_temperature"
+        android:layout_width="145dp"
+        android:layout_height="110dp">
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/tv_temperature"
+            android:layout_centerVertical="true"
+            android:text="25"
+            android:textColor="@color/Sunny_f"
+            android:textSize="80sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/signel"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="℃"
+            android:textColor="@color/Sunny_f"
+            android:textSize="35sp" />
+        <TextView
+            android:id="@+id/tv_tempdiff"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="23-26"
+            android:textColor="@color/Sunny_f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/weather"
+        android:text="晴"
+        android:textSize="100sp"
+        android:textStyle="bold"
+        android:textColor="@color/Sunny_f"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rv_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_toask"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

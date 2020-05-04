@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">KnowWeather</string>
+    <string name="ver">v123456</string>
+    <string name="Sunny">晴</string>
+    <string name="Clear">晴</string>
+    <string name="Fair">晴</string>
+    <string name="Fairs">晴</string>
+    <string name="Cloudy">多云</string>
+    <string name="PartlyCloudy">多云</string>
+    <string name="PartlyCloudys">多云</string>
+    <string name="MostlyCloudy">多云</string>
+    <string name="MostlyCloudys">多云</string>
+    <string name="Overcast">阴</string>
+    <string name="Shower">雨</string>
+    <string name="Thundershower">雨</string>
+    <string name="ThundershowerwithHail">雷阵雨伴有冰雹</string>
+    <string name="LightRain">雨</string>
+    <string name="ModerateRain">雨</string>
+    <string name="HeavyRain">雨</string>
+    <string name="Storm">雨</string>
+    <string name="HeavyStorm">雨</string>
+    <string name="SevereStorm">暴雨</string>
+    <string name="IceRain">雨</string>
+    <string name="Sleet">雪</string>
+    <string name="SnowFlurry">雪</string>
+    <string name="LightSnow">雪</string>
+    <string name="ModerateSnow">雪</string>
+    <string name="HeavySnow">雪</string>
+    <string name="Snowstorm">雪</string>
+    <string name="Dust">浮尘</string>
+    <string name="Sand">扬沙</string>
+    <string name="Duststorm">沙尘暴</string>
+    <string name="Sandstorm">强沙尘暴</string>
+    <string name="Foggy">雾</string>
+    <string name="Haze">霾</string>
+    <string name="Windy">风</string>
+    <string name="Blustery">大风</string>
+    <string name="Hurricane">飓风</string>
+    <string name="TropicalStorm">热带风暴</string>
+    <string name="Tornado">龙卷风</string>
+    <string name="Cold">冷</string>
+    <string name="Hot">热</string>
+    <string name="Unknown">未知</string>
+
+</resources>

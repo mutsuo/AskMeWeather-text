@@ -1,0 +1,366 @@
+@startuml
+
+title __APP's Class Diagram__\n
+
+  namespace neet.com.knowweather {
+    namespace Adapter {
+      class neet.com.knowweather.Adapter.ChatAdapter {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    class neet.com.knowweather.BuildConfig {
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    class neet.com.knowweather.BuildConfig {
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    class neet.com.knowweather.MainActivity {
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace SettingApps {
+      class neet.com.knowweather.SettingApps.UserSettingApplication {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace TempTestActivity {
+      class neet.com.knowweather.TempTestActivity.ChatActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace TempTestActivity {
+      class neet.com.knowweather.TempTestActivity.LocationActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.CitySelectActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.ForgetPassowrdActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.FullverActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IMWeatherAskActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IndexActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IndexNA {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.LoginPasswordActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.LogupActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.NicknameSetActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.OrderActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.OrderListActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PasswordChangeActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PersonCenterActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PersonMsgActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PhoneChangeActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PhoneChangesActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.ReSetPasswordActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.SettingActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.SettingIndexActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.VersionActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.WaitingActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.login_vercode {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.welcomeActivity {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace bean {
+      class neet.com.knowweather.bean.Message {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace bean {
+      class neet.com.knowweather.bean.OrderMenu {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace bean {
+      class neet.com.knowweather.bean.OrderRecord {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace bean {
+      class neet.com.knowweather.bean.Person {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace tool {
+      class neet.com.knowweather.tool.GetLocation {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace tool {
+      class neet.com.knowweather.tool.GetWeather {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace tool {
+      class neet.com.knowweather.tool.MyLocationListener {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace tool {
+      class neet.com.knowweather.tool.SMSToll {
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace tool {
+      class neet.com.knowweather.tool.VoiceToText {
+      }
+    }
+  }
+  
+
+  neet.com.knowweather.Adapter.ChatAdapter -up-|> com.chad.library.adapter.base.BaseMultiItemQuickAdapter
+  neet.com.knowweather.MainActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.SettingApps.UserSettingApplication -up-|> android.app.Application
+  neet.com.knowweather.TempTestActivity.ChatActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.TempTestActivity.ChatActivity o-- neet.com.knowweather.Adapter.ChatAdapter : chatAdapter
+  neet.com.knowweather.TempTestActivity.LocationActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.TempTestActivity.LocationActivity o-- neet.com.knowweather.tool.MyLocationListener : myListener
+  neet.com.knowweather.activity.CitySelectActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.ForgetPassowrdActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.ForgetPassowrdActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.ForgetPassowrdActivity o-- neet.com.knowweather.tool.SMSToll : smsToll
+  neet.com.knowweather.activity.FullverActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.IMWeatherAskActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.IMWeatherAskActivity o-- neet.com.knowweather.Adapter.ChatAdapter : chatAdapter
+  neet.com.knowweather.activity.IMWeatherAskActivity o-- neet.com.knowweather.activity.IMWeatherAskActivity.mRecognizerListener : mRecognizerListener
+  neet.com.knowweather.activity.IndexActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.IndexActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.IndexNA -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.LoginPasswordActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.LogupActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.LogupActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.LogupActivity o-- neet.com.knowweather.tool.SMSToll : smsToll
+  neet.com.knowweather.activity.NicknameSetActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.OrderActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.OrderListActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PasswordChangeActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PersonCenterActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PersonMsgActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PhoneChangeActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PhoneChangesActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.ReSetPasswordActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.SettingActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.SettingActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.SettingActivity o-- neet.com.knowweather.SettingApps.UserSettingApplication : userSettingApplication
+  neet.com.knowweather.activity.SettingIndexActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.VersionActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.WaitingActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.WaitingActivity o-- neet.com.knowweather.SettingApps.UserSettingApplication : userSettingApplication
+  neet.com.knowweather.activity.login_vercode .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.login_vercode -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.login_vercode o-- neet.com.knowweather.tool.SMSToll : smsToll
+  neet.com.knowweather.activity.welcomeActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.bean.Message .up.|> com.chad.library.adapter.base.entity.MultiItemEntity
+  neet.com.knowweather.tool.GetLocation o-- neet.com.knowweather.tool.MyLocationListener : myListener
+  neet.com.knowweather.tool.MyLocationListener -up-|> com.baidu.location.BDAbstractLocationListener
+  neet.com.knowweather.tool.VoiceToText .up.|> com.iflytek.cloud.RecognizerListener
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,0 +1,460 @@
+@startuml
+
+title __ACTIVITY's Class Diagram__\n
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.CitySelectActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.ForgetPassowrdActivity {
+          - btnGetCode : Button
+          - ivNext : ImageView
+          - mTimer : CountDownTimer
+          - mistakemsg1 : TextView
+          - mistakemsg2 : TextView
+          - useraccount : EditText
+          - useraccountImg : ImageView
+          - vercodImg : ImageView
+          - vercode : EditText
+          - weCard : CardView
+          + dispatchTouchEvent()
+          + isHideInput()
+          + onClick()
+          + onOptionsItemSelected()
+          # onCreate()
+          ~ findview()
+          - HideSoftInput()
+          - checkPhoneValid()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.FullverActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IMWeatherAskActivity {
+          - btnSpeak : Button
+          - commonToolbar : RelativeLayout
+          - commonToolbarBack : RelativeLayout
+          - commonToolbarTitle : TextView
+          - etContent : EditText
+          - ivAudio : ImageView
+          - ivEditext : ImageView
+          - ivsend : ImageView
+          - llBottom : LinearLayout
+          - llContent : LinearLayout
+          - mInitListener : InitListener
+          - recognizer : SpeechRecognizer
+          - rlRecord : RelativeLayout
+          - rvChatList : RecyclerView
+          - sentence : StringBuilder
+          - speaker : SpeechSynthesizer
+          - swipeChat : SwipeRefreshLayout
+          # onCreate()
+          ~ initMSC()
+          ~ initView()
+          ~ remsg()
+          ~ sendmessage()
+          ~ setClick()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IMWeatherAskActivity.mRecognizerListener {
+          + onBeginOfSpeech()
+          + onEndOfSpeech()
+          + onError()
+          + onEvent()
+          + onResult()
+          + onVolumeChanged()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IndexActivity {
+          + mLocationClient : LocationClient
+          - bgcolor : int
+          - city : TextView
+          - fColor : int
+          - ibtMunu : ImageButton
+          - indexBg : RelativeLayout
+          - ivToask : ImageView
+          - myListener : BDAbstractLocationListener
+          - rvTemperature : RelativeLayout
+          - signel : TextView
+          - smartRefreshLayout : SmartRefreshLayout
+          - tempdiff : String
+          - temperature : String
+          - tvTempdiff : TextView
+          - tvTemperature : TextView
+          - tvTime : TextView
+          - wea : TextView
+          - weather : String
+          + onClick()
+          # onCreate()
+          ~ findview()
+          ~ getLocation()
+          ~ getWeatherByServer()
+          ~ getweather()
+          ~ reflush()
+          ~ setIndex()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.IndexNA {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.LoginPasswordActivity {
+          - btLogIn : Button
+          - btLogInChange : Button
+          - forget : TextView
+          - mistakemsg1 : TextView
+          - mistakemsg2 : TextView
+          - password : EditText
+          - passwordImg : ImageView
+          - upassowrd : String
+          - useraccount : EditText
+          - useraccountImg : ImageView
+          - userphone : String
+          - weCard : CardView
+          + dispatchTouchEvent()
+          + isHideInput()
+          + onOptionsItemSelected()
+          + setListener()
+          # onCreate()
+          - HideSoftInput()
+          - checkPhoneValid()
+          - findview()
+          - toast()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.LogupActivity {
+          - btBackIndex : Button
+          - btLogUp : Button
+          - btnGetCode : Button
+          - mTimer : CountDownTimer
+          - mistakemsg1 : TextView
+          - mistakemsg2 : TextView
+          - mistakemsg3 : TextView
+          - password : EditText
+          - passwordImg : ImageView
+          - useraccount : EditText
+          - useraccountImg : ImageView
+          - vercodImg : ImageView
+          - vercode : EditText
+          - weCard : CardView
+          + dispatchTouchEvent()
+          + isHideInput()
+          + onClick()
+          + onOptionsItemSelected()
+          # onCreate()
+          # onDestroy()
+          ~ findview()
+          ~ initListener()
+          - HideSoftInput()
+          - checkPhoneValid()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.NicknameSetActivity {
+          - btEnter : Button
+          - editImg : ImageView
+          - name : EditText
+          - nickname : String
+          - weCard : CardView
+          - weLogo : ImageView
+          # onCreate()
+          ~ findview()
+          ~ setLinster()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.OrderActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.OrderListActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PasswordChangeActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PersonCenterActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PersonMsgActivity {
+          - ivPassowrd : ImageView
+          - ivPhone : ImageView
+          - phone : TextView
+          - pvTime : TimePickerView
+          - rv1 : RelativeLayout
+          - toolbar : Toolbar
+          - tvBirthday : TextView
+          - tvBirthday2 : TextView
+          - tvNickname : TextView
+          - tvPhone : TextView
+          # onCreate()
+          ~ findview()
+          ~ initTimePicker()
+          - getTime()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PhoneChangeActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.PhoneChangesActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.ReSetPasswordActivity {
+          - btLogIn : Button
+          - ensurepassword : EditText
+          - isShow1 : Boolean
+          - isShow2 : Boolean
+          - ivShowensurepsw : ImageView
+          - ivShownewpsw : ImageView
+          - mistakemsg1 : TextView
+          - mistakemsg2 : TextView
+          - newpassword : EditText
+          - passwordImg : ImageView
+          - useraccountImg : ImageView
+          - weCard : CardView
+          + dispatchTouchEvent()
+          + isHideInput()
+          + onOptionsItemSelected()
+          # onCreate()
+          ~ findview()
+          ~ setListner()
+          - HideSoftInput()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.SettingActivity {
+          - ibtMunu : ImageButton
+          - isLogin : boolean
+          - login : TextView
+          - logined : LinearLayout
+          - nologin : LinearLayout
+          - personcenter : TextView
+          - setting : TextView
+          - settingS : TextView
+          - unlock : TextView
+          + onClick()
+          # onCreate()
+          ~ initivew()
+          ~ showui()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.SettingIndexActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.VersionActivity {
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.WaitingActivity {
+          + isNetworkConnected()
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.login_vercode {
+          - btLogIn : Button
+          - btLogInChange : Button
+          - btnGetCode : Button
+          - eventHandler : EventHandler
+          - mTimer : CountDownTimer
+          - mistakemsg1 : TextView
+          - mistakemsg2 : TextView
+          - tvForget : TextView
+          - useraccount : EditText
+          - useraccountImg : ImageView
+          - vercodImg : ImageView
+          - vercode : EditText
+          - weCard : CardView
+          + dispatchTouchEvent()
+          + isHideInput()
+          + onClick()
+          + onOptionsItemSelected()
+          # onCreate()
+          # onDestroy()
+          ~ findview()
+          ~ initListener()
+          - HideSoftInput()
+          - checkPhoneValid()
+      }
+    }
+  }
+  
+
+  namespace neet.com.knowweather {
+    namespace activity {
+      class neet.com.knowweather.activity.welcomeActivity {
+          - btLogIn : Button
+          - btLogUp : Button
+          - tvTest : TextView
+          - weCard : CardView
+          - weLogo : ImageView
+          # onCreate()
+          - findView()
+          - setClickListener()
+      }
+    }
+  }
+  
+
+  neet.com.knowweather.activity.CitySelectActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.ForgetPassowrdActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.ForgetPassowrdActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.ForgetPassowrdActivity o-- neet.com.knowweather.tool.SMSToll : smsToll
+  neet.com.knowweather.activity.FullverActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.IMWeatherAskActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.IMWeatherAskActivity o-- neet.com.knowweather.Adapter.ChatAdapter : chatAdapter
+  neet.com.knowweather.activity.IMWeatherAskActivity o-- neet.com.knowweather.activity.IMWeatherAskActivity.mRecognizerListener : mRecognizerListener
+  neet.com.knowweather.activity.IMWeatherAskActivity +-down- neet.com.knowweather.activity.IMWeatherAskActivity.mRecognizerListener
+  neet.com.knowweather.activity.IMWeatherAskActivity.mRecognizerListener .up.|> com.iflytek.cloud.RecognizerListener
+  neet.com.knowweather.activity.IndexActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.IndexActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.IndexNA -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.LoginPasswordActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.LogupActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.LogupActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.LogupActivity o-- neet.com.knowweather.tool.SMSToll : smsToll
+  neet.com.knowweather.activity.NicknameSetActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.OrderActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.OrderListActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PasswordChangeActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PersonCenterActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PersonMsgActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PhoneChangeActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.PhoneChangesActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.ReSetPasswordActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.SettingActivity .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.SettingActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.SettingActivity o-- neet.com.knowweather.SettingApps.UserSettingApplication : userSettingApplication
+  neet.com.knowweather.activity.SettingIndexActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.VersionActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.WaitingActivity -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.WaitingActivity o-- neet.com.knowweather.SettingApps.UserSettingApplication : userSettingApplication
+  neet.com.knowweather.activity.login_vercode .up.|> android.view.View.OnClickListener
+  neet.com.knowweather.activity.login_vercode -up-|> android.support.v7.app.AppCompatActivity
+  neet.com.knowweather.activity.login_vercode o-- neet.com.knowweather.tool.SMSToll : smsToll
+  neet.com.knowweather.activity.welcomeActivity -up-|> android.support.v7.app.AppCompatActivity
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PersonCenterActivity"
+    android:background="#f3f9fb">
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:contentInsetStartWithNavigation="0dp"
+    app:navigationIcon="@drawable/ic_back"
+    android:background="@color/settingbg"
+    android:layout_alignParentTop="true">
+    <TextView
+        android:textSize="16dp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:text="个人中心          "
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:cardElevation="8dp">
+        <RelativeLayout
+            android:id="@+id/rv_pmsg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:id="@+id/username"
+                android:textSize="16sp"
+                android:text="测试用用户名"
+                android:textColor="@color/pctext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:layout_below="@id/username"
+                android:id="@+id/userid"
+                android:textSize="16sp"
+                android:text="uid:123456"
+                android:textColor="@color/pctext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:id="@+id/ib_usermsg"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:background="#00000000"
+                android:src="@drawable/ic_next"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/cv_onclock"
+            >
+            <TextView
+                android:id="@+id/tv_onclock"
+                android:textSize="14sp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/pctext"
+                android:text="解锁完整版"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/cv_butdata"
+            >
+            <TextView
+                android:id="@+id/tv_bydata"
+                android:textSize="14sp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/pctext"
+                android:text="购买记录"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</RelativeLayout>

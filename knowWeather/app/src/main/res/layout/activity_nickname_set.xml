@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.welcomeActivity"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="-190dp"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:cardBackgroundColor="@color/bg_welcome"
+        app:cardCornerRadius="200dp"
+        android:clickable="false"
+        android:id="@+id/we_card">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            >
+            <ImageView
+                android:id="@+id/we_logo"
+                android:layout_marginTop="280dp"
+                android:src="@drawable/logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:layout_marginTop="300dp"
+                android:text="你好，新朋友我该怎么称呼你呀"
+                android:layout_width="143dp"
+                android:layout_height="59dp"
+                android:layout_toEndOf="@id/we_logo"
+                android:layout_toRightOf="@id/we_logo" />
+
+            <ImageView
+                android:id="@+id/edit_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/we_logo"
+                android:layout_marginTop="66dp"
+                android:src="@drawable/edit" />
+            <EditText
+                android:id="@+id/nicname"
+                android:layout_marginLeft="6dp"
+                android:textColor="@android:color/white"
+                android:hint="你的昵称？"
+                android:layout_below="@id/we_logo"
+                android:layout_marginTop="63dp"
+                android:layout_toRightOf="@id/edit_img"
+                android:textSize="16sp"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:textSize="15sp"
+        android:background="@drawable/button_filet_shape"
+        android:textColor="@android:color/white"
+        android:text="就是这个了"
+        android:id="@+id/bt_enter"
+        android:layout_centerHorizontal="true"
+        android:layout_width="268dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/we_card"
+        android:layout_marginTop="77dp"
+        android:gravity="center" />
+
+</RelativeLayout>

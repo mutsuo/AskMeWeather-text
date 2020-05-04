@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--按钮颜色-->
+    <color name="wl_btcolor">#50667e</color>
+    <color name="we_text_color">#8c8c8c</color>
+
+    <color name="mistakemsg">#ffeb3b</color>
+
+    <color name="waitingbg">#004a7c</color>
+    <color name="settingbg">#004a7c</color>
+    <color name="fullverbg">#004a7c</color>
+
+    <color name="pctext">#505050</color>
+    <color name="fullvertext1">#505050</color>
+    <color name="fullvertext2">#9d9d9d</color>
+
+    <color name="vercolor">#9d9d9d</color>
+</resources>

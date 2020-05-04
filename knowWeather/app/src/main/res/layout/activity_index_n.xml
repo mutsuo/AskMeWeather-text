@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.WaitingActivity"
+    android:id="@+id/refreshLayout"
+    app:srlEnablePreviewInEditMode="true"
+    >
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:background="@color/Unknown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:id="@+id/ibt_munu"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/munu" />
+        <TextView
+            android:id="@+id/tv_1"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@color/Unknown_f"
+            android:text="对不起"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@id/tv_1"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            android:textColor="@color/Unknown_f"
+            android:text="没网"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/error"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

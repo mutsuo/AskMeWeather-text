@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PhoneChangeActivity"
+    android:orientation="vertical"
+    android:background="#f3f9fb">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_back"
+        android:background="@color/settingbg"
+        android:layout_alignParentTop="true"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:text="修改手机号"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_next"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:text="保存"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:textSize="14sp"
+                    android:id="@+id/tv_newphone"
+                    android:text="新手机号"
+                    android:gravity="center"
+                    android:layout_width="90dp"
+                    android:layout_height="50dp" />
+                <EditText
+                    android:inputType="number"
+                    android:layout_marginRight="30dp"
+                    android:paddingLeft="5dp"
+                    android:textSize="14sp"
+                    android:id="@+id/et_newphone"
+                    android:layout_toRightOf="@id/tv_newphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:textSize="14sp"
+                    android:id="@+id/tv_vercode"
+                    android:text="验证码"
+                    android:gravity="center"
+                    android:layout_width="90dp"
+                    android:layout_height="50dp" />
+                <EditText
+                    android:inputType="textPassword"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="5dp"
+                    android:textSize="14sp"
+                    android:id="@+id/et_vercode"
+                    android:layout_toRightOf="@id/tv_vercode"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp" />
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/get_code_btn"
+                    android:id="@+id/btn_get_code"
+                    android:layout_width="65dp"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@+id/et_vercode"
+                    android:text="获取验证码"
+                    android:textSize="10dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

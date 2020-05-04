@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.FullverActivity"
+    android:background="@color/fullverbg"
+    android:paddingTop="40dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    >
+    <android.support.v7.widget.CardView
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingRight="28dp"
+            android:paddingLeft="28dp"
+            android:orientation="vertical"
+            android:paddingTop="37dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/fullvertext1"
+                android:text="成为会员，解锁所有功能"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="了解天气，更了解生活"
+                android:textSize="16sp"
+                android:textColor="@color/fullvertext2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="45dp"
+                android:textStyle="bold"
+                android:textColor="@color/fullvertext1"
+                android:text="更丰富的气象信息"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textColor="@color/fullvertext1"
+                android:text="空气湿度、能见度、风向、风速、风力、日出日落时间"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/fullvertext1"
+                android:text="更好地安排生活"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textColor="@color/fullvertext1"
+                android:text="解锁生活、运动、健康三大生活指数"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/fullvertext1"
+                android:text="驾车出行不发愁"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textColor="@color/fullvertext1"
+                android:text="及时的机动车尾号限行提醒"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_unlock"
+                android:textSize="16sp"
+                android:layout_marginTop="120dp"
+                android:background="@drawable/button_filet_shape"
+                android:textColor="@android:color/white"
+                android:text="立即解锁"
+                android:gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="45dp" />
+            <Button
+                android:id="@+id/btn_no"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"
+                android:textColor="@color/fullvertext2"
+                android:text="暂不考虑"
+                android:gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="45dp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

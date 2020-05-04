@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--背景颜色-->
+<resources>
+    <color name="Sunny">#ffefa9</color>
+    <color name="Clear">#ffefa9</color>
+    <color name="Fair">#ffefa9</color>
+    <color name="nFair">#ffefa9</color>
+    <color name="Cloudy">#6c808c</color>
+    <color name="PartlyCloudy">#6c808c</color>
+    <color name="nPartlyCloudy">#6c808c</color>
+    <color name="MostlyCloudy">#6c808c</color>
+    <color name="nMostlyCloudy">#6c808c</color>
+    <color name="Overcast">#6c808c</color>
+    <color name="Shower">#286372</color>
+    <color name="ThundershowerwithHail">#286372</color>
+    <color name="LightRain">#286372</color>
+    <color name="ModerateRain">#286372</color>
+    <color name="HeavyRain">#286372</color>
+    <color name="Storm">#286372</color>
+    <color name="HeavyStorm">#286372</color>
+    <color name="SevereStorm">#286372</color>
+    <color name="IceRain">#f2f4f6</color>
+    <color name="Sleet">#f2f4f6</color>
+    <color name="SnowFlurry">#f2f4f6</color>
+    <color name="LightSnow">#f2f4f6</color>
+    <color name="ModerateSnow">#f2f4f6</color>
+    <color name="HeavySnow">#f2f4f6</color>
+    <color name="Snowstorm">#f2f4f6</color>
+    <color name="Dust">#f2eee0</color>
+    <color name="Sand">#f2eee0</color>
+    <color name="Duststorm">#f2eee0</color>
+    <color name="Sandstorm">#f2eee0</color>
+    <color name="Foggy">#89a3b2</color>
+    <color name="Haze">#f2eee0</color>
+    <color name="Windy">#2c786c</color>
+    <color name="Blustery">#2c786c</color>
+    <color name="Hurricane">#2c786c</color>
+    <color name="TropicalStorm">#2c786c</color>
+    <color name="Tornado">#2c786c</color>
+    <color name="Cold">#f2f4f6</color>
+    <color name="Hot">#ffefa9</color>
+    <color name="Unknown">#5d5b6a</color>
+
+    <!--欢迎页背景-->
+    <color name="bg_welcome">#004a7c</color>
+    <color name="bg_login_btn">#50667e</color>
+    <color name="bg_log_change">#ffffff</color>
+</resources>

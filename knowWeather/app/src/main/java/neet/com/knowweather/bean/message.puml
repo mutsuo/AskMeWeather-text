@@ -1,0 +1,17 @@
+@startuml
+
+interface MultiItemEntity{
+    int getItemType();
+}
+MultiItemEntity <|-- Message
+class Message {
+ public static final int SEND = 1;
+    public static final int RECEIVE = 2;
+    private int itemType;
+    private String msg;
++Message(int itemType)
++String getMsg()
++int getItemType()
+}
+
+@enduml

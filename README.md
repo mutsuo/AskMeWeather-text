@@ -1,6 +1,6 @@
 # AskMeWeather-text
 
-> 毕业设计（进行中）
+> 毕业设计
 >
 > [AskMeWeather](https://github.com/mutsuo/AskMeWeather)第二代，安卓应用
 
